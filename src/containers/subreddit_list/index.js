@@ -20,11 +20,11 @@ class SubRedditList extends Component {
       })
   }
 
-  // Create generate the 
-  createSubList = (subredditList) => {
-    console.log(subredditList);
+  // Create generate list items for the listing :)
+  createSubListItems = (subredditList) => {
+    console.log(subredditList.data);
     return (
-      subredditList.map(element => <ListGroupItem key={element.data.name}>{element.data.display_name_prefixed}</ListGroupItem>)
+      subredditList.map(e => <ListGroupItem key={e.data.id}>{e.data.display_name_prefixed}</ListGroupItem>)
     )
   }
 
@@ -33,8 +33,9 @@ class SubRedditList extends Component {
       <Col sm="4">
         <h3 className='text-center'>Subreddits</h3>
         <ListGroup>
-          {this.props.subredditList ? 
-            this.createSubList(this.props.subredditList) : 
+          {
+            this.props.subredditList ? 
+            this.createSubListItems(this.props.subredditList) :
             <ListGroupItem>Loading... Please wait.</ListGroupItem>
           }
         </ListGroup>
