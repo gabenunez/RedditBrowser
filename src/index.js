@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 // Initial application state
 const initialState = {
-    count: 0
+    currentSubReddit: '',
+    sortOrder: ''
 };
 
 // Reducers should always return something :)
