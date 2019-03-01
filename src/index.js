@@ -10,6 +10,7 @@ import { createStore } from 'redux';
 
 // Initial application state
 const initialState = {
+    subredditList: '',
     currentSubReddit: '',
     sortOrder: ''
 };
@@ -22,7 +23,11 @@ function reducer(state = initialState, action) {
         //     return {
         //         count: state.count + 1
         //     }
-
+        case 'SET_SUBREDDIT_LIST':
+            console.log(action.payload);
+            return {
+                subredditList: action.payload
+            }
         default:
             return state;
     }
