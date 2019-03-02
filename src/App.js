@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Container, Row, Col } from 'reactstrap';
 import SubredditList from './containers/subreddit_list';
+import SubredditPosts from './containers/subreddit_posts';
 
 class App extends Component {
   render() {
@@ -11,10 +12,7 @@ class App extends Component {
           <Col sm="4">
             <h3 className='text-center'>Selected Post</h3>
           </Col>
-          <Col sm="4">
-            <h3 className='text-center'>Subreddit Posts</h3>
-          </Col>
-
+          <SubredditPosts />
           <SubredditList />
         </Row>
       </Container>

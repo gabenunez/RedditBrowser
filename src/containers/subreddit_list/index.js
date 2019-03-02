@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Col, ListGroup, ListGroupItem } from 'reactstrap';
+import SubRedditListItem from './list_item';
 import axios from 'axios';
 
 class SubRedditList extends Component {
+
   componentDidMount() {
     // Set initial state of subreddits
 
@@ -24,16 +26,15 @@ class SubRedditList extends Component {
   createSubListItems = (subredditList) => {
     console.log(subredditList);
     return (
-      subredditList.map(e => {
+      subredditList.map((e, i) => {
+        const {id, icon_img, display_name} = e.data;
+        
         return (
-            <ListGroupItem className='sub-li' key={e.data.id}>
-              {e.data.icon_img ?
-                <img 
-                  src={e.data.icon_img} 
-                  alt={e.data.display_name_prefixed} 
-                /> : null}
-              {'/' + e.data.display_name_prefixed}
-            </ListGroupItem>
+            <SubRedditListItem 
+              key={id} 
+              img={icon_img} 
+              name={display_name}
+            />
           );
         }
       )

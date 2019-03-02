@@ -10,23 +10,27 @@ import { createStore } from 'redux';
 
 // Initial application state
 const initialState = {
-    subredditList: '',
-    currentSubReddit: '',
+    subredditList: null,
+    selectedSubreddit: null,
     sortOrder: ''
 };
 
 // Reducers should always return something :)
 // State: Current State
 function reducer(state = initialState, action) {
+    // For testing purposes, log all payloads
+    console.log(action.payload);
+
     switch(action.type) {
-        // case 'INCREMENT':
-        //     return {
-        //         count: state.count + 1
-        //     }
         case 'SET_SUBREDDIT_LIST':
-            console.log(action.payload);
             return {
+                ...state,
                 subredditList: action.payload
+            }
+        case 'SET_SELECTED_SUBREDDIT':
+            return {
+                ...state,
+                selectedSubreddit: action.payload
             }
         default:
             return state;
