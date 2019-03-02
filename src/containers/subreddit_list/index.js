@@ -22,9 +22,21 @@ class SubRedditList extends Component {
 
   // Create generate list items for the listing :)
   createSubListItems = (subredditList) => {
-    console.log(subredditList.data);
+    console.log(subredditList);
     return (
-      subredditList.map(e => <ListGroupItem key={e.data.id}>{e.data.display_name_prefixed}</ListGroupItem>)
+      subredditList.map(e => {
+        return (
+            <ListGroupItem className='sub-li' key={e.data.id}>
+              {e.data.icon_img ?
+                <img 
+                  src={e.data.icon_img} 
+                  alt={e.data.display_name_prefixed} 
+                /> : null}
+              {'/' + e.data.display_name_prefixed}
+            </ListGroupItem>
+          );
+        }
+      )
     )
   }
 
