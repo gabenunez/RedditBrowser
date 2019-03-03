@@ -9,9 +9,9 @@ class SubRedditPosts extends Component {
     this.fetchSubredditPosts();
   }
 
-  // Re-trigger data fetch if selected subreddit changes.
+  // Re-trigger data fetch if selected subreddit or sort changes.
   componentDidUpdate(prevProps) {
-    if (this.props.selectedSubreddit !== prevProps.selectedSubreddit) {
+    if (this.props.selectedSubreddit !== prevProps.selectedSubreddit || this.props.postSortOrder !== prevProps.postSortOrder) {
       this.fetchSubredditPosts();
     }
   }
@@ -27,7 +27,7 @@ class SubRedditPosts extends Component {
       }) 
     }
 
-    axios.get(`https://www.reddit.com/r/${this.props.selectedSubreddit}/hot.json`)
+    axios.get(`https://www.reddit.com/r/${this.props.selectedSubreddit}/${this.props.postSortOrder.toLowerCase()}.json`)
     .then((response) => {
       this.props.dispatch({
         type: 'SET_SUBREDDIT_POSTS', 
@@ -87,7 +87,8 @@ function mapStateToProps(state) {
   return {
     selectedSubreddit: state.selectedSubreddit,
     subredditPosts: state.subredditPosts,
-    selectedRedditPosts: state.selectedRedditPosts
+    selectedRedditPosts: state.selectedRedditPosts,
+    postSortOrder: state.postSortOrder
   };
 }
 

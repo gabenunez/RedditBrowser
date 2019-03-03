@@ -14,7 +14,7 @@ const initialState = {
     selectedSubreddit: null,
     subredditPosts: null,
     selectedRedditPosts: [],
-    sortOrder: '',
+    postSortOrder: 'Hot',
 };
 
 // Reducers should always return something :)
@@ -28,6 +28,11 @@ function reducer(state = initialState, action) {
         return {
           ...state,
           subredditList: action.payload
+        }
+      case 'SET_SORT_ORDER':
+        return {
+          ...state,
+          postSortOrder: action.payload
         }
       case 'SET_SELECTED_SUBREDDIT':
         return {
