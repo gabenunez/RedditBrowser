@@ -6,6 +6,16 @@ import Markdown from 'markdown-to-jsx';
 
 class SelectedPost extends Component {
 
+  // Check thumbnail, if thumbnail contains http, assume
+  // it has an image, otherwise, return text-only image.
+  checkForThumbnail = (post) => {
+    if (post.thumbnail.includes('http')) {
+      return post.thumbnail;
+    }
+
+    return TextOnlyImg;
+  }
+
   render() {
     const {selectedRedditPosts} = this.props;
     if(selectedRedditPosts.length < 1) {
@@ -20,13 +30,18 @@ class SelectedPost extends Component {
         <Media>
           <Media left href={`https://www.reddit.com${selectedRedditPosts[0].permalink}`}>
             
-            {/* If thumbnail contains http, assume it has an image */}
-            <Media object width='100px' className='post-thumbnail' src={selectedRedditPosts[0].thumbnail.includes('http') ? selectedRedditPosts[0].thumbnail : TextOnlyImg} alt={selectedRedditPosts[0].title} />
+            <Media 
+              object 
+              className='post-thumbnail' 
+              src={this.checkForThumbnail(selectedRedditPosts[0])} alt={selectedRedditPosts[0].title} />
             
           </Media>
           <Media body>
             <Media heading>
               {selectedRedditPosts[0].title}
+            </Media>
+            <Media heading>
+              <small>Posted by: {selectedRedditPosts[0].author}</small>
             </Media>
             {selectedRedditPosts[0].selftext ? <Markdown>{selectedRedditPosts[0].selftext}</Markdown> : ''}
           </Media>

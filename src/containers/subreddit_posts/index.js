@@ -69,7 +69,11 @@ class SubRedditPosts extends Component {
         const {title, id} = e.data;
 
         return (
-          <ListGroupItem key={id} onClick={() => this.setSelectedPost(e)} className={this.checkIfActive(selectedRedditPosts, id)}>
+          <ListGroupItem 
+            key={id} 
+            onClick={() => this.setSelectedPost(e)} 
+            className={this.checkIfActive(selectedRedditPosts, id)}
+          >
             {title}
           </ListGroupItem>
           );
