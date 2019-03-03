@@ -13,7 +13,7 @@ const initialState = {
     subredditList: null,
     selectedSubreddit: null,
     subredditPosts: null,
-    selectedSubredditPost: null,
+    selectedRedditPosts: [],
     sortOrder: '',
 };
 
@@ -24,28 +24,33 @@ function reducer(state = initialState, action) {
     console.log(action.payload);
 
     switch(action.type) {
-        case 'SET_SUBREDDIT_LIST':
-            return {
-                ...state,
-                subredditList: action.payload
-            }
-        case 'SET_SELECTED_SUBREDDIT':
-            return {
-                ...state,
-                selectedSubreddit: action.payload
-            }
-        case 'SET_SELECTED_POST':
+      case 'SET_SUBREDDIT_LIST':
         return {
-            ...state,
-            selectedSubredditPost: action.payload
+          ...state,
+          subredditList: action.payload
         }
-        case 'SET_SUBREDDIT_POSTS':
-            return {
-                ...state,
-                subredditPosts: action.payload
-            }
-        default:
-            return state;
+      case 'SET_SELECTED_SUBREDDIT':
+        return {
+          ...state,
+          selectedSubreddit: action.payload
+        }
+      case 'SET_SELECTED_POST':
+        return {
+          ...state,
+          selectedSubredditPost: action.payload
+        }
+      case 'SET_SUBREDDIT_POSTS':
+        return {
+          ...state,
+          subredditPosts: action.payload
+        }
+      case 'ADD_SUBREDDIT_POST':
+        return {
+          ...state,
+          selectedRedditPosts: [action.payload, ...state.selectedRedditPosts]
+        }
+      default:
+        return state;
     }
 }
 

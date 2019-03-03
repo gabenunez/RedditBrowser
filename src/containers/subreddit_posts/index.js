@@ -40,6 +40,14 @@ class SubRedditPosts extends Component {
     })
   }
 
+  setSelectedPost(e) {
+    // Add clicked post to a "playlist"... thing :)
+    this.props.dispatch({
+      type: 'ADD_SUBREDDIT_POST', 
+      payload: e.data
+    });
+  }
+
   render() {
     
     if(!this.props.subredditPosts) {
@@ -54,7 +62,7 @@ class SubRedditPosts extends Component {
         const {name, title} = e.data;
 
         return (
-          <ListGroupItem key={name}>
+          <ListGroupItem key={name} onClick={() => this.setSelectedPost(e)}>
             {title}
           </ListGroupItem>
           );
