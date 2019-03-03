@@ -9,6 +9,10 @@
   display: inline-block;
 }
 
+* {
+  font-size: 14px;
+}
+
 .list-group-item {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -16,6 +20,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  font-size: 12px;
 }
 
 .list-group-item:hover {

@@ -48,9 +48,16 @@ class SubRedditPosts extends Component {
     });
   }
 
+  // Check if group <li> is active using IDs
+  checkIfActive = (selectedRedditPosts, uniqueID) => {
+    if (selectedRedditPosts.length > 0 && selectedRedditPosts[0].id === uniqueID) {
+      return 'active';
+    }
+  }
+
   render() {
-    
-    if(!this.props.subredditPosts) {
+    const {subredditPosts, selectedRedditPosts} = this.props;
+    if(!subredditPosts) {
       return (
         <ListGroupItem>
           Please wait... loading posts.
@@ -59,10 +66,10 @@ class SubRedditPosts extends Component {
     }
     return (
       this.props.subredditPosts.map((e) => {
-        const {name, title} = e.data;
+        const {title, id} = e.data;
 
         return (
-          <ListGroupItem key={name} onClick={() => this.setSelectedPost(e)}>
+          <ListGroupItem key={id} onClick={() => this.setSelectedPost(e)} className={this.checkIfActive(selectedRedditPosts, id)}>
             {title}
           </ListGroupItem>
           );
@@ -75,7 +82,8 @@ class SubRedditPosts extends Component {
 function mapStateToProps(state) {
   return {
     selectedSubreddit: state.selectedSubreddit,
-    subredditPosts: state.subredditPosts
+    subredditPosts: state.subredditPosts,
+    selectedRedditPosts: state.selectedRedditPosts
   };
 }
 

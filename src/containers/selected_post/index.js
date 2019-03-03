@@ -19,7 +19,10 @@ class SelectedPost extends Component {
         <Col>
         <Media>
           <Media left href={`https://www.reddit.com${selectedRedditPosts[0].permalink}`}>
-            <Media object width='100px' className='post-thumbnail' src={selectedRedditPosts[0].thumbnail.includes('https') ? selectedRedditPosts[0].thumbnail : TextOnlyImg} alt={selectedRedditPosts[0].title} />
+            
+            {/* If thumbnail contains http, assume it has an image */}
+            <Media object width='100px' className='post-thumbnail' src={selectedRedditPosts[0].thumbnail.includes('http') ? selectedRedditPosts[0].thumbnail : TextOnlyImg} alt={selectedRedditPosts[0].title} />
+            
           </Media>
           <Media body>
             <Media heading>
