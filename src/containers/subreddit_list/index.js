@@ -24,11 +24,10 @@ class SubRedditList extends Component {
 
   // Create generate list items for the listing :)
   createSubListItems = (subredditList) => {
-    console.log(subredditList);
     return (
-      subredditList.map((e, i) => {
+      subredditList.map((e) => {
         const {id, icon_img, display_name} = e.data;
-        
+
         return (
             <SubRedditListItem 
               key={id} 

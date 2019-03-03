@@ -12,7 +12,9 @@ import { createStore } from 'redux';
 const initialState = {
     subredditList: null,
     selectedSubreddit: null,
-    sortOrder: ''
+    subredditPosts: null,
+    selectedSubredditPost: null,
+    sortOrder: '',
 };
 
 // Reducers should always return something :)
@@ -31,6 +33,16 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 selectedSubreddit: action.payload
+            }
+        case 'SET_SELECTED_POST':
+        return {
+            ...state,
+            selectedSubredditPost: action.payload
+        }
+        case 'SET_SUBREDDIT_POSTS':
+            return {
+                ...state,
+                subredditPosts: action.payload
             }
         default:
             return state;
