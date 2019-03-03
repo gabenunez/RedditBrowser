@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import SortDropdown from './sort-dropdown';
+import SubredditSearch from './subreddit_search'
 
 class Header extends Component {
   getPostTitle = (selectedPosts) => {
     if(selectedPosts[0].title) {
       return selectedPosts[0].title;
     }
-  }
-
-  getPostSubreddit = (selectedPosts) => {
-    
   }
 
   render() {
@@ -24,6 +21,9 @@ class Header extends Component {
         </Col>
         <Col sm='4'>
           <SortDropdown />
+        </Col>
+        <Col sm='3'>
+          <SubredditSearch />
         </Col>
       </Row>
     )

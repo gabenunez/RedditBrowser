@@ -1,46 +1,35 @@
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Form, FormGroup, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 
 class SubredditSearch extends React.Component {
-  constructor(props) {
-    super(props);
-    this.toggle = this.toggle.bind(this);
-  }
 
-  state = {
-    dropdownOpen: false
-  };
 
-  toggle() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
-    }));
-  }
-
-  handleClick = (e) => {
+  handleChange = (e) => {
+    console.log(e.target.value)
     this.props.dispatch({
-      type: 'SET_SORT_ORDER', 
-      payload: e.currentTarget.textContent
+      type: 'SET_SUBREDDIT_SEARCH_TEXT', 
+      payload: e.target.value
+    });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.dispatch({
+      type: 'SET_SELECTED_SUBREDDIT', 
+      payload: this.props.subredditSearchText
     });
   }
 
   render() {
     return (
       <div className='text-center'>
-        <span>Sort Type:</span>
-        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-          <DropdownToggle caret>
-            {this.props.postSortOrder}
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem onClick={this.handleClick}>Hot</DropdownItem>
-            <DropdownItem onClick={this.handleClick}>New</DropdownItem>
-            <DropdownItem onClick={this.handleClick}>Rising</DropdownItem>
-            <DropdownItem onClick={this.handleClick}>Controversial</DropdownItem>
-            <DropdownItem onClick={this.handleClick}>Top</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+        <span>Subreddit Search:</span>
+        <Form inline onSubmit={this.handleSubmit}>
+          <FormGroup className='sub-input-center'>
+            <Input onChange={this.handleChange} value={this.props.subredditSearchText} type="text" placeholder="RocketLeague" />
+          </FormGroup>
+        </Form>
       </div>
     );
   }
@@ -51,7 +40,8 @@ class SubredditSearch extends React.Component {
 function mapStateToProps(state) {
     return {
       selectedRedditPosts: state.selectedRedditPosts,
-      postSortOrder: state.postSortOrder
+      postSortOrder: state.postSortOrder,
+      subredditSearchText: state.subredditSearchText
     };
   }
   

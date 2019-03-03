@@ -11,6 +11,7 @@ import { createStore } from 'redux';
 // Initial application state
 const initialState = {
     subredditList: null,
+    subredditSearchText: '',
     selectedSubreddit: null,
     subredditPosts: null,
     selectedRedditPosts: [],
@@ -34,6 +35,12 @@ function reducer(state = initialState, action) {
           ...state,
           postSortOrder: action.payload
         }
+      case 'SET_SUBREDDIT_SEARCH_TEXT':
+        return {
+          ...state,
+          subredditSearchText: action.payload
+        }
+
       case 'SET_SELECTED_SUBREDDIT':
         return {
           ...state,
