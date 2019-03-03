@@ -4,6 +4,10 @@ import { ListGroupItem } from 'reactstrap';
 import axios from 'axios';
 
 class SubRedditPosts extends Component {
+  state = {
+    fetchError: null
+  }
+
   // Trigger fetching of data immediately if component mounts.
   componentDidMount() {
     this.fetchSubredditPosts();
@@ -18,7 +22,10 @@ class SubRedditPosts extends Component {
 
   // Fetch subreddit posts and send em' to Redux
   fetchSubredditPosts() {
-    
+    this.setState({
+      fetchError: null
+    })
+
     // Trigger "loading" status
     if(this.props.selectedSubreddit) {
       this.props.dispatch({
@@ -35,13 +42,17 @@ class SubRedditPosts extends Component {
       })
     })
     .catch((error) => {
-      // handle error
+      // NOTE: Very general error
+      // Any errors result in the following msg.
+      this.setState({
+        fetchError: 'Error getting data... try a different subreddit?'
+      })
       console.log(error);
     })
   }
 
+  // Add clicked post to a "playlist"... thing :)
   setSelectedPost(e) {
-    // Add clicked post to a "playlist"... thing :)
     this.props.dispatch({
       type: 'ADD_SUBREDDIT_POST', 
       payload: e.data
@@ -57,6 +68,11 @@ class SubRedditPosts extends Component {
 
   render() {
     const {subredditPosts, selectedRedditPosts} = this.props;
+    
+    if(this.state.fetchError) {
+      return <ListGroupItem>{this.state.fetchError}</ListGroupItem>
+    }
+
     if(!subredditPosts) {
       return (
         <ListGroupItem>
