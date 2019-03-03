@@ -1,3 +1,8 @@
+.post-thumbnail {
+  width: 75px;
+  padding-right: 10px;
+}
+
 .sub-li > img {
   width: 20px;
   padding-right: 5px;
