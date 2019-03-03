@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Col, ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroupItem } from 'reactstrap';
 import SubRedditListItem from './list_item';
 import axios from 'axios';
 
@@ -41,17 +41,10 @@ class SubRedditList extends Component {
   }
 
   render() {
-    return (
-      <Col sm="4">
-        <h3 className='text-center'>Subreddits</h3>
-        <ListGroup>
-          {
-            this.props.subredditList ? 
-            this.createSubListItems(this.props.subredditList) :
-            <ListGroupItem>Loading... Please wait.</ListGroupItem>
-          }
-        </ListGroup>
-      </Col>
+    return (   
+      this.props.subredditList ? 
+      this.createSubListItems(this.props.subredditList) :
+      <ListGroupItem>Loading... Please wait.</ListGroupItem>
     );
   }
 }

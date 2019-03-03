@@ -10,9 +10,16 @@ class App extends Component {
     return (
       <Container fluid={true}>
         <Row>
-          <Col sm="4">
+          <Col sm="5">
             <h3 className='text-center'>Selected Post</h3>
           </Col>
+
+          {/* 
+            Renders subreddit posts if there's a selected subreddit.
+
+            NOTE: Kept this way for now to render "loading" text 
+            if the the selectedSubreddit is null.
+          */}
           <Col sm="4">
             <h3 className='text-center'>Subreddit Posts</h3>
             <ListGroup>
@@ -21,7 +28,15 @@ class App extends Component {
             }
             </ListGroup>
           </Col>
-          <SubredditList />
+          
+          {/* Renders list of subreddits available */}
+          <Col sm="3">
+            <h3 className='text-center'>Subreddits</h3>
+            <ListGroup>
+              <SubredditList />
+            </ListGroup>
+          </Col>
+
         </Row>
       </Container>
     );
