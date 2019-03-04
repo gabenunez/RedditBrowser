@@ -31,9 +31,7 @@ const initialState = {
 // Reducers should always return something :)
 // State: Current State
 function reducer(state = initialState, action) {
-    // For testing purposes, log all payloads
-    console.log(action.payload);
-
+  
     switch(action.type) {
       case 'SET_SUBREDDIT_LIST':
         return {
