@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import SortDropdown from './sort-dropdown';
-import SubredditSearch from './subreddit_search'
+import SubredditSearch from './subreddit_search';
+import HistoryNav from './history-nav';
 
 class Header extends Component {
   getPostTitle = (selectedPosts) => {
@@ -16,8 +17,10 @@ class Header extends Component {
 
     return (
       <Row className='header-bar'>
-        <Col sm='5' className='header-title'>
-          {selectedRedditPosts.length > 0 ? `/r/${selectedRedditPosts[0].subreddit} - ${selectedRedditPosts[0].title}`: ''}
+        <Col sm='5'>
+          <span className='header-title'>{selectedRedditPosts.length > 0 ? `/r/${selectedRedditPosts[0].subreddit} - ${selectedRedditPosts[0].title}`: ''}</span>
+
+          <HistoryNav />
         </Col>
         <Col sm='4'>
           <SortDropdown />

@@ -15,11 +15,22 @@
 
 .header-title {
   font-size: 10px;
+  display: block;
+  min-height: 57px;
 }
 
 .header-bar {
   border-bottom: solid 1px;
   padding: 10px 0;
+}
+
+.nav-btns {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.nav-btns:hover {
+  cursor: pointer;
 }
 
 .sub-input-center {
@@ -30,7 +41,7 @@
   font-size: 1.25rem;
 }
 
-.list-group-item {
+.list-group-item, .nav-btns {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;

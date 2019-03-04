@@ -64,6 +64,11 @@ class SubRedditPosts extends Component {
       // If subreddits don't, clear and add
       } else {
         this.props.dispatch({
+          type: 'SET_ACTIVE_POST', 
+          payload: 0
+        });
+        
+        this.props.dispatch({
           type: 'RESET_SUBREDDIT_POST', 
           payload: e.data
         });
@@ -76,7 +81,6 @@ class SubRedditPosts extends Component {
         payload: e.data
       });
     }
-    console.log(this.props.selectedRedditPosts);
   }
 
   // Check if group <li> is active using IDs

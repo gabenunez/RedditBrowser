@@ -17,7 +17,7 @@ class SelectedPost extends Component {
   }
 
   render() {
-    const {selectedRedditPosts} = this.props;
+    const {selectedRedditPosts, activeSelectedPost} = this.props;
     if(selectedRedditPosts.length < 1) {
       return (
         <p>Please a select a post.</p>
@@ -28,22 +28,22 @@ class SelectedPost extends Component {
       <Row>
         <Col>
         <Media>
-          <Media left href={`https://www.reddit.com${selectedRedditPosts[0].permalink}`}>
+          <Media left href={`https://www.reddit.com${selectedRedditPosts[activeSelectedPost].permalink}`}>
             
             <Media 
               object 
               className='post-thumbnail' 
-              src={this.checkForThumbnail(selectedRedditPosts[0])} alt={selectedRedditPosts[0].title} />
+              src={this.checkForThumbnail(selectedRedditPosts[activeSelectedPost])} alt={selectedRedditPosts[activeSelectedPost].title} />
             
           </Media>
           <Media body>
             <Media heading>
-              {selectedRedditPosts[0].title}
+              {selectedRedditPosts[activeSelectedPost].title}
             </Media>
             <Media heading>
-              <small>Posted by: {selectedRedditPosts[0].author}</small>
+              <small>Posted by: {selectedRedditPosts[activeSelectedPost].author}</small>
             </Media>
-            {selectedRedditPosts[0].selftext ? <Markdown>{selectedRedditPosts[0].selftext}</Markdown> : ''}
+            {selectedRedditPosts[activeSelectedPost].selftext ? <Markdown>{selectedRedditPosts[activeSelectedPost].selftext}</Markdown> : ''}
           </Media>
         </Media>
         </Col>
@@ -56,7 +56,8 @@ class SelectedPost extends Component {
 // Object keys are now props! AY-YO!
 function mapStateToProps(state) {
   return {
-    selectedRedditPosts: state.selectedRedditPosts
+    selectedRedditPosts: state.selectedRedditPosts,
+    activeSelectedPost: state.activeSelectedPost
   };
 }
 export default connect(mapStateToProps)(SelectedPost);
