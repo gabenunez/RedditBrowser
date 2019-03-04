@@ -21,12 +21,13 @@ class SubredditSearch extends React.Component {
   }
 
   render() {
+    const {subredditSearchText} = this.props;
     return (
       <div className='text-center'>
         <span>Subreddit Search:</span>
         <Form inline onSubmit={this.handleSubmit}>
           <FormGroup className='sub-input-center'>
-            <Input onChange={this.handleChange} value={this.props.subredditSearchText} type="text" placeholder="RocketLeague" />
+            <Input onChange={this.handleChange} value={subredditSearchText} type="text" placeholder="Google" />
           </FormGroup>
         </Form>
       </div>

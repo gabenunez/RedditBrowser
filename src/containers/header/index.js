@@ -8,12 +8,12 @@ import HistoryNav from './history-nav';
 class Header extends Component {
 
   render() {
-    const {selectedRedditPosts} = this.props;
+    const {selectedRedditPosts, activeSelectedPost} = this.props;
 
     return (
       <Row className='header-bar'>
         <Col sm='5'>
-          <span className='header-title'>{selectedRedditPosts.length > 0 ? `/r/${selectedRedditPosts[this.props.activeSelectedPost].subreddit} - ${selectedRedditPosts[this.props.activeSelectedPost].title}`: ''}</span>
+          <span className='header-title'>{selectedRedditPosts.length > 0 ? `/r/${selectedRedditPosts[activeSelectedPost].subreddit} - ${selectedRedditPosts[activeSelectedPost].title}`: ''}</span>
 
           <HistoryNav />
         </Col>

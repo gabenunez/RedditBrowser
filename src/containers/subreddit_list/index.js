@@ -63,13 +63,15 @@ class SubRedditList extends Component {
 
   // Autocomplete functionality
   autoComplete = () => {
+    const {dispatch, subredditSearchText} = this.props;
+
     // Reset always back to available to clear warning
     this.setState({
       autoCompleteAvailable: true
     })
 
     // Set to loading state
-    this.props.dispatch({
+    dispatch({
       type: 'SET_SUBREDDIT_LIST', 
       payload: null
     });
@@ -77,12 +79,12 @@ class SubRedditList extends Component {
     // Get that search on each key stroke.
     // NOTE: Pretty sure it's because of the api...
     // but some subreddits simply won't show... like /r/rocketleague :(
-    axios.get(`https://www.reddit.com/subreddits/search.json?q=${this.props.subredditSearchText}`)
+    axios.get(`https://www.reddit.com/subreddits/search.json?q=${subredditSearchText}`)
     .then((response) => {
       
       // Filter results to ensure user's entered text is in the sub title.
       const filiteredResponse = response.data.data.children.filter((li) => {
-        if(!li.data.display_name.includes(this.props.subredditSearchText)) {
+        if(!li.data.display_name.includes(subredditSearchText)) {
           return false;
         }
         return true;
@@ -96,7 +98,7 @@ class SubRedditList extends Component {
         })
       }
 
-      this.props.dispatch({
+      dispatch({
         type: 'SET_SUBREDDIT_LIST', 
         payload: filiteredResponse
       });
@@ -108,13 +110,16 @@ class SubRedditList extends Component {
   }
 
   render() {
-    if(!this.state.autoCompleteAvailable) {
+    const {autoCompleteAvailable} = this.state;
+    const {subredditList} = this.props;
+
+    if(!autoCompleteAvailable) {
       return (
         <ListGroupItem>Sorry, no subreddit under that name.</ListGroupItem>
       )
     }
     return (   
-      this.props.subredditList ? 
+      subredditList ? 
       this.createSubListItems() :
       <ListGroupItem>Loading... Please wait.</ListGroupItem>
     );

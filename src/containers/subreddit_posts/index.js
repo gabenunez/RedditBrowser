@@ -15,28 +15,31 @@ class SubRedditPosts extends Component {
 
   // Re-trigger data fetch if selected subreddit or sort changes.
   componentDidUpdate(prevProps) {
-    if (this.props.selectedSubreddit !== prevProps.selectedSubreddit || this.props.postSortOrder !== prevProps.postSortOrder) {
+    const {selectedSubreddit, postSortOrder} = this.props;
+    if (selectedSubreddit !== prevProps.selectedSubreddit || postSortOrder !== prevProps.postSortOrder) {
       this.fetchSubredditPosts();
     }
   }
 
   // Fetch subreddit posts and send em' to Redux
   fetchSubredditPosts() {
+    const {selectedSubreddit, dispatch, postSortOrder} = this.props;
+
     this.setState({
       fetchError: null
     })
 
     // Trigger "loading" status
-    if(this.props.selectedSubreddit) {
-      this.props.dispatch({
+    if(selectedSubreddit) {
+      dispatch({
         type: 'SET_SUBREDDIT_POSTS', 
         payload: null
       }) 
     }
 
-    axios.get(`https://www.reddit.com/r/${this.props.selectedSubreddit}/${this.props.postSortOrder.toLowerCase()}.json`)
+    axios.get(`https://www.reddit.com/r/${selectedSubreddit}/${postSortOrder.toLowerCase()}.json`)
     .then((response) => {
-      this.props.dispatch({
+      dispatch({
         type: 'SET_SUBREDDIT_POSTS', 
         payload: response.data.data.children
       })
@@ -53,30 +56,32 @@ class SubRedditPosts extends Component {
 
   // Add clicked post to a "playlist"... thing :)
   setSelectedPost = (e) => {
-    if(this.props.selectedRedditPosts[0]) {
+    const {selectedRedditPosts, dispatch} = this.props;
+
+    if(selectedRedditPosts[0]) {
       // If subreddits match, just add
-      if(e.data.subreddit === this.props.selectedRedditPosts[0].subreddit) {
-        this.props.dispatch({
+      if(e.data.subreddit === selectedRedditPosts[0].subreddit) {
+        dispatch({
           type: 'ADD_SUBREDDIT_POST', 
           payload: e.data
         });
       
       // If subreddits don't, clear and add
       } else {
-        this.props.dispatch({
+        dispatch({
           type: 'SET_ACTIVE_POST', 
           payload: 0
         });
         
-        this.props.dispatch({
+        dispatch({
           type: 'RESET_SUBREDDIT_POST', 
           payload: e.data
         });
       }
     
-      // If array is empty, add it :)
-    } else if(this.props.selectedRedditPosts.length === 0) {
-      this.props.dispatch({
+    // If array is empty, add it :)
+    } else if(selectedRedditPosts.length === 0) {
+      dispatch({
         type: 'ADD_SUBREDDIT_POST', 
         payload: e.data
       });
@@ -92,9 +97,10 @@ class SubRedditPosts extends Component {
 
   render() {
     const {subredditPosts, selectedRedditPosts} = this.props;
+    const {fetchError} = this.state;
     
-    if(this.state.fetchError) {
-      return <ListGroupItem>{this.state.fetchError}</ListGroupItem>
+    if(fetchError) {
+      return <ListGroupItem>{fetchError}</ListGroupItem>
     }
 
     if(!subredditPosts) {
@@ -105,7 +111,7 @@ class SubRedditPosts extends Component {
       )
     }
     return (
-      this.props.subredditPosts.map((e) => {
+      subredditPosts.map((e) => {
         const {title, id} = e.data;
 
         return (
