@@ -2,6 +2,10 @@
   font-size: 14px;
 }
 
+h3 {
+  padding: 10px 0;
+}
+
 .post-thumbnail {
   width: 75px;
   padding-right: 10px;
@@ -22,6 +26,7 @@
 .header-bar {
   border-bottom: solid 1px;
   padding: 10px 0;
+  margin-bottom: 10px;
 }
 
 .nav-btns {

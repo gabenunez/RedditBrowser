@@ -6,11 +6,6 @@ import SubredditSearch from './subreddit_search';
 import HistoryNav from './history-nav';
 
 class Header extends Component {
-  getPostTitle = (selectedPosts) => {
-    if(selectedPosts[0].title) {
-      return selectedPosts[0].title;
-    }
-  }
 
   render() {
     const {selectedRedditPosts} = this.props;
@@ -18,7 +13,7 @@ class Header extends Component {
     return (
       <Row className='header-bar'>
         <Col sm='5'>
-          <span className='header-title'>{selectedRedditPosts.length > 0 ? `/r/${selectedRedditPosts[0].subreddit} - ${selectedRedditPosts[0].title}`: ''}</span>
+          <span className='header-title'>{selectedRedditPosts.length > 0 ? `/r/${selectedRedditPosts[this.props.activeSelectedPost].subreddit} - ${selectedRedditPosts[this.props.activeSelectedPost].title}`: ''}</span>
 
           <HistoryNav />
         </Col>
@@ -36,7 +31,8 @@ class Header extends Component {
 function mapStateToProps(state) {
   return {
     selectedSubreddit: state.selectedSubreddit,
-    selectedRedditPosts: state.selectedRedditPosts
+    selectedRedditPosts: state.selectedRedditPosts,
+    activeSelectedPost: state.activeSelectedPost
   };
 }
 

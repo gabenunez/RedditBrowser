@@ -20,7 +20,7 @@ class SelectedPost extends Component {
     const {selectedRedditPosts, activeSelectedPost} = this.props;
     if(selectedRedditPosts.length < 1) {
       return (
-        <p>Please a select a post.</p>
+        <p className='text-center'>Please a select a post.</p>
       )
     }
 

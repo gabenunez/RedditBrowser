@@ -28,7 +28,7 @@ class App extends Component {
             <h3 className='text-center'>Subreddit Posts</h3>
             <ListGroup>
             {this.props.selectedSubreddit ? 
-              <SubredditPosts /> : <ListGroupItem>Please select a subreddit.</ListGroupItem>
+              <SubredditPosts /> : <ListGroupItem className='text-center'>Please select a subreddit.</ListGroupItem>
             }
             </ListGroup>
           </Col>
