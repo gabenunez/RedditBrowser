@@ -52,11 +52,31 @@ class SubRedditPosts extends Component {
   }
 
   // Add clicked post to a "playlist"... thing :)
-  setSelectedPost(e) {
-    this.props.dispatch({
-      type: 'ADD_SUBREDDIT_POST', 
-      payload: e.data
-    });
+  setSelectedPost = (e) => {
+    if(this.props.selectedRedditPosts[0]) {
+      // If subreddits match, just add
+      if(e.data.subreddit === this.props.selectedRedditPosts[0].subreddit) {
+        this.props.dispatch({
+          type: 'ADD_SUBREDDIT_POST', 
+          payload: e.data
+        });
+      
+      // If subreddits don't, clear and add
+      } else {
+        this.props.dispatch({
+          type: 'RESET_SUBREDDIT_POST', 
+          payload: e.data
+        });
+      }
+    
+      // If array is empty, add it :)
+    } else if(this.props.selectedRedditPosts.length === 0) {
+      this.props.dispatch({
+        type: 'ADD_SUBREDDIT_POST', 
+        payload: e.data
+      });
+    }
+    console.log(this.props.selectedRedditPosts);
   }
 
   // Check if group <li> is active using IDs

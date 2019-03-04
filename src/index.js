@@ -60,6 +60,11 @@ function reducer(state = initialState, action) {
           ...state,
           selectedRedditPosts: [action.payload, ...state.selectedRedditPosts]
         }
+        case 'RESET_SUBREDDIT_POST':
+          return {
+            ...state,
+            selectedRedditPosts: [action.payload]
+          }
       default:
         return state;
     }
