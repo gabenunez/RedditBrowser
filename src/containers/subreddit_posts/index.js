@@ -90,7 +90,8 @@ class SubRedditPosts extends Component {
 
   // Check if group <li> is active using IDs
   checkIfActive = (selectedRedditPosts, uniqueID) => {
-    if (selectedRedditPosts.length > 0 && selectedRedditPosts[0].id === uniqueID) {
+    const {activeSelectedPost} = this.props;
+    if (selectedRedditPosts.length > 0 && selectedRedditPosts[activeSelectedPost].id === uniqueID) {
       return 'active';
     }
   }
@@ -134,7 +135,8 @@ function mapStateToProps(state) {
     selectedSubreddit: state.selectedSubreddit,
     subredditPosts: state.subredditPosts,
     selectedRedditPosts: state.selectedRedditPosts,
-    postSortOrder: state.postSortOrder
+    postSortOrder: state.postSortOrder,
+    activeSelectedPost: state.activeSelectedPost
   };
 }
 
