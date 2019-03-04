@@ -6,7 +6,16 @@ import * as serviceWorker from './serviceWorker';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { createStore } from 'redux';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, reducer);
 
 // Initial application state
 const initialState = {
@@ -88,7 +97,9 @@ function reducer(state = initialState, action) {
 }
 
 // Create that redux store (the whole point we use redux)
-const store = createStore(reducer);
+let store = createStore(persistedReducer)
+
+let persistor = persistStore(store)
 
 ReactDOM.render(
     <Provider store={store}>
