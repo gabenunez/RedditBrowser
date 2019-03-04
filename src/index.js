@@ -40,7 +40,6 @@ function reducer(state = initialState, action) {
           ...state,
           subredditSearchText: action.payload
         }
-
       case 'SET_SELECTED_SUBREDDIT':
         return {
           ...state,

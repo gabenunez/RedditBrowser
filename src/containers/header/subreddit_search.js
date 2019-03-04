@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 class SubredditSearch extends React.Component {
 
-
   handleChange = (e) => {
     console.log(e.target.value)
     this.props.dispatch({
