@@ -17,8 +17,8 @@ class SelectedPost extends Component {
   }
 
   render() {
-    const {selectedRedditPosts, activeSelectedPost} = this.props;
-    if(selectedRedditPosts.length < 1) {
+    const {redditPosts, activeSelectedPost} = this.props;
+    if(redditPosts.length < 1) {
       return (
         <p className='text-center'>Please a select a post.</p>
       )
@@ -28,22 +28,22 @@ class SelectedPost extends Component {
       <Row>
         <Col>
         <Media>
-          <Media left href={`https://www.reddit.com${selectedRedditPosts[activeSelectedPost].permalink}`}>
+          <Media left href={`https://www.reddit.com${redditPosts[activeSelectedPost].permalink}`}>
             
             <Media 
               object 
               className='post-thumbnail' 
-              src={this.checkForThumbnail(selectedRedditPosts[activeSelectedPost])} alt={selectedRedditPosts[activeSelectedPost].title} />
+              src={this.checkForThumbnail(redditPosts[activeSelectedPost])} alt={redditPosts[activeSelectedPost].title} />
             
           </Media>
           <Media body>
             <Media heading>
-              {selectedRedditPosts[activeSelectedPost].title}
+              {redditPosts[activeSelectedPost].title}
             </Media>
             <Media heading>
-              <small>Posted by: {selectedRedditPosts[activeSelectedPost].author}</small>
+              <small>Posted by: {redditPosts[activeSelectedPost].author}</small>
             </Media>
-            {selectedRedditPosts[activeSelectedPost].selftext ? <Markdown>{selectedRedditPosts[activeSelectedPost].selftext}</Markdown> : ''}
+            {redditPosts[activeSelectedPost].selftext ? <Markdown>{redditPosts[activeSelectedPost].selftext}</Markdown> : ''}
           </Media>
         </Media>
         </Col>
@@ -56,7 +56,7 @@ class SelectedPost extends Component {
 // Object keys are now props! AY-YO!
 function mapStateToProps(state) {
   return {
-    selectedRedditPosts: state.selectedRedditPosts,
+    redditPosts: state.redditPosts,
     activeSelectedPost: state.activeSelectedPost
   };
 }

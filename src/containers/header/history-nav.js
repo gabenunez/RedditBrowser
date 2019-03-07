@@ -16,12 +16,12 @@ class HistoryNav extends Component {
   }
 
   render() {
-    const {selectedRedditPosts, activeSelectedPost} = this.props;
+    const {redditPosts, activeSelectedPost} = this.props;
 
     return (
       <Row>
         <Col sm='6'>
-          {activeSelectedPost < selectedRedditPosts.length - 1 ? 
+          {activeSelectedPost < redditPosts.length - 1 ? 
           <span className='nav-btns' onClick={this.previousPost}>&lsaquo; Previous</span> : '' }
         </Col>
         <Col sm='6' className='text-right'>
@@ -34,7 +34,7 @@ class HistoryNav extends Component {
 
 function mapStateToProps(state) {
   return {
-    selectedRedditPosts: state.selectedRedditPosts,
+    redditPosts: state.redditPosts,
     activeSelectedPost: state.activeSelectedPost
   };
 }

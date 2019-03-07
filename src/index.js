@@ -23,7 +23,7 @@ const initialState = {
     subredditSearchText: '',
     selectedSubreddit: null,
     subredditPosts: null,
-    selectedRedditPosts: [],
+    redditPosts: [],
     postSortOrder: 'Hot',
     activeSelectedPost: 0
 };
@@ -66,12 +66,12 @@ function reducer(state = initialState, action) {
       case 'ADD_SUBREDDIT_POST':
         return {
           ...state,
-          selectedRedditPosts: [action.payload, ...state.selectedRedditPosts]
+          redditPosts: [action.payload, ...state.redditPosts]
         }
       case 'RESET_SUBREDDIT_POST':
         return {
           ...state,
-          selectedRedditPosts: [action.payload]
+          redditPosts: [action.payload]
         }
       case 'SET_ACTIVE_POST':
         return {

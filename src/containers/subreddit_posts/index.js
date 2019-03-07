@@ -51,11 +51,11 @@ class SubRedditPosts extends Component {
 
   // Add clicked post to a "playlist"... thing :)
   setSelectedPost = (e) => {
-    const {selectedRedditPosts, dispatch} = this.props;
+    const {redditPosts, dispatch} = this.props;
 
-    if(selectedRedditPosts[0]) {
+    if(redditPosts[0]) {
       // If subreddits match, just add
-      if(e.data.subreddit === selectedRedditPosts[0].subreddit) {
+      if(e.data.subreddit === redditPosts[0].subreddit) {
         dispatch({
           type: 'ADD_SUBREDDIT_POST', 
           payload: e.data
@@ -75,7 +75,7 @@ class SubRedditPosts extends Component {
       }
     
     // If array is empty, add it :)
-    } else if(selectedRedditPosts.length === 0) {
+    } else if(redditPosts.length === 0) {
       dispatch({
         type: 'ADD_SUBREDDIT_POST', 
         payload: e.data
@@ -84,9 +84,9 @@ class SubRedditPosts extends Component {
   }
 
   // Check if group <li> is active using IDs
-  checkIfActive = (selectedRedditPosts, uniqueID) => {
+  checkIfActive = (redditPosts, uniqueID) => {
     const {activeSelectedPost} = this.props;
-    if (selectedRedditPosts.length > 0 && selectedRedditPosts[activeSelectedPost].id === uniqueID) {
+    if (redditPosts.length > 0 && redditPosts[activeSelectedPost].id === uniqueID) {
       return 'active';
     }
   }
@@ -97,7 +97,7 @@ class SubRedditPosts extends Component {
   }
 
   render() {
-    const {subredditPosts, selectedRedditPosts, selectedSubreddit} = this.props;
+    const {subredditPosts, redditPosts, selectedSubreddit} = this.props;
     const {fetchError} = this.state;
     
     if(!selectedSubreddit) {
@@ -120,7 +120,7 @@ class SubRedditPosts extends Component {
           <ListGroupItem 
             key={id} 
             onClick={() => this.setSelectedPost(e)} 
-            className={this.checkIfActive(selectedRedditPosts, id)}
+            className={this.checkIfActive(redditPosts, id)}
           >
             {title}
           </ListGroupItem>
@@ -135,7 +135,7 @@ function mapStateToProps(state) {
   return {
     selectedSubreddit: state.selectedSubreddit,
     subredditPosts: state.subredditPosts,
-    selectedRedditPosts: state.selectedRedditPosts,
+    redditPosts: state.redditPosts,
     postSortOrder: state.postSortOrder,
     activeSelectedPost: state.activeSelectedPost
   };

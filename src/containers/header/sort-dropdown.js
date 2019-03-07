@@ -51,7 +51,7 @@ class Sort_Dropdown extends React.Component {
 // Object keys are now props! AY-YO!
 function mapStateToProps(state) {
     return {
-      selectedRedditPosts: state.selectedRedditPosts,
+      redditPosts: state.redditPosts,
       postSortOrder: state.postSortOrder
     };
   }
