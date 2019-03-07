@@ -118,6 +118,7 @@ class SubRedditList extends Component {
         <ListGroupItem>Sorry, no subreddit under that name.</ListGroupItem>
       )
     }
+    
     return (   
       subredditList ? 
       this.createSubListItems() :

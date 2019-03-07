@@ -23,9 +23,9 @@ class Sort_Dropdown extends React.Component {
   render() {
     const {postSortOrder} = this.props;
     return (
-      <div className='text-center'>
-        <span>Sort Type:</span>
-        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+      <>
+        <p className='text-center'>Sort Type:</p>
+        <Dropdown className='text-center' isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle caret>
             {postSortOrder}
           </DropdownToggle>
@@ -37,7 +37,7 @@ class Sort_Dropdown extends React.Component {
             <DropdownItem onClick={this.setSetOrder}>Top</DropdownItem>
           </DropdownMenu>
         </Dropdown>
-      </div>
+      </>
     );
   }
 }

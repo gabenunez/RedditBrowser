@@ -3,16 +3,14 @@ import { Form, FormGroup, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 
 class SubredditSearch extends React.Component {
-
-  handleChange = (e) => {
-    console.log(e.target.value)
+  updateSubSearch = (e) => {
     this.props.dispatch({
       type: 'SET_SUBREDDIT_SEARCH_TEXT', 
       payload: e.target.value
     });
   }
 
-  handleSubmit = (e) => {
+  setSubreddit = (e) => {
     e.preventDefault();
     this.props.dispatch({
       type: 'SET_SELECTED_SUBREDDIT', 
@@ -23,14 +21,14 @@ class SubredditSearch extends React.Component {
   render() {
     const {subredditSearchText} = this.props;
     return (
-      <div className='text-center'>
-        <span>Subreddit Search:</span>
-        <Form inline onSubmit={this.handleSubmit}>
+      <>
+        <p className='text-center'>Subreddit Search:</p>
+        <Form inline onSubmit={this.setSubreddit}>
           <FormGroup className='sub-input-center'>
-            <Input onChange={this.handleChange} value={subredditSearchText} type="text" placeholder="Google" />
+            <Input onChange={this.updateSubSearch} value={subredditSearchText} type="text" placeholder="Google" />
           </FormGroup>
         </Form>
-      </div>
+      </>
     );
   }
 }
