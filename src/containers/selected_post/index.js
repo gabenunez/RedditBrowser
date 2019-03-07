@@ -24,7 +24,8 @@ class SelectedPost extends Component {
         <p className='text-center'>Please a select a post.</p>
       )
     }
-
+    
+    // De-construct selected reddit post
     const {permalink, title, author, selftext, thumbnail} = redditPosts[activeSelectedPost];
 
     return (
