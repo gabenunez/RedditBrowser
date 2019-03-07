@@ -13,7 +13,7 @@ class Sort_Dropdown extends React.Component {
     }));
   }
 
-  setSetOrder = (e) => {
+  setSortOrder = (e) => {
     this.props.dispatch({
       type: 'SET_SORT_ORDER', 
       payload: e.currentTarget.textContent
@@ -30,11 +30,11 @@ class Sort_Dropdown extends React.Component {
             {postSortOrder}
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem onClick={this.setSetOrder}>Hot</DropdownItem>
-            <DropdownItem onClick={this.setSetOrder}>New</DropdownItem>
-            <DropdownItem onClick={this.setSetOrder}>Rising</DropdownItem>
-            <DropdownItem onClick={this.setSetOrder}>Controversial</DropdownItem>
-            <DropdownItem onClick={this.setSetOrder}>Top</DropdownItem>
+            <DropdownItem onClick={this.setSortOrder}>Hot</DropdownItem>
+            <DropdownItem onClick={this.setSortOrder}>New</DropdownItem>
+            <DropdownItem onClick={this.setSortOrder}>Rising</DropdownItem>
+            <DropdownItem onClick={this.setSortOrder}>Controversial</DropdownItem>
+            <DropdownItem onClick={this.setSortOrder}>Top</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </>
