@@ -3,22 +3,17 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import { connect } from 'react-redux';
 
 class Sort_Dropdown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.toggle = this.toggle.bind(this);
-  }
-
   state = {
     dropdownOpen: false
   };
 
-  toggle() {
+  toggle = () => {
     this.setState(prevState => ({
       dropdownOpen: !prevState.dropdownOpen
     }));
   }
 
-  handleClick = (e) => {
+  setSetOrder = (e) => {
     this.props.dispatch({
       type: 'SET_SORT_ORDER', 
       payload: e.currentTarget.textContent
@@ -35,11 +30,11 @@ class Sort_Dropdown extends React.Component {
             {postSortOrder}
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem onClick={this.handleClick}>Hot</DropdownItem>
-            <DropdownItem onClick={this.handleClick}>New</DropdownItem>
-            <DropdownItem onClick={this.handleClick}>Rising</DropdownItem>
-            <DropdownItem onClick={this.handleClick}>Controversial</DropdownItem>
-            <DropdownItem onClick={this.handleClick}>Top</DropdownItem>
+            <DropdownItem onClick={this.setSetOrder}>Hot</DropdownItem>
+            <DropdownItem onClick={this.setSetOrder}>New</DropdownItem>
+            <DropdownItem onClick={this.setSetOrder}>Rising</DropdownItem>
+            <DropdownItem onClick={this.setSetOrder}>Controversial</DropdownItem>
+            <DropdownItem onClick={this.setSetOrder}>Top</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </div>
