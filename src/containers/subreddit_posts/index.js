@@ -52,10 +52,18 @@ class SubRedditPosts extends Component {
   // Add clicked post to a "playlist"... thing :)
   setSelectedPost = (e) => {
     const {redditPosts, dispatch} = this.props;
+    const {id, subreddit} = e.data; 
+    const currentPost = redditPosts[0];
 
-    if(redditPosts[0]) {
+    if(currentPost) {
+      
+      // If id matches current post, don't do anything. 
+      if(id === currentPost.id) {
+        return;
+      }
+
       // If subreddits match, just add
-      if(e.data.subreddit === redditPosts[0].subreddit) {
+      if(subreddit === currentPost.subreddit) {
         dispatch({
           type: 'ADD_SUBREDDIT_POST', 
           payload: e.data
@@ -75,7 +83,7 @@ class SubRedditPosts extends Component {
       }
     
     // If array is empty, add it :)
-    } else if(redditPosts.length === 0) {
+    } else {
       dispatch({
         type: 'ADD_SUBREDDIT_POST', 
         payload: e.data
@@ -113,13 +121,13 @@ class SubRedditPosts extends Component {
     }
 
     return (
-      subredditPosts.map((e) => {
-        const {title, id} = e.data;
+      subredditPosts.map((post) => {
+        const {title, id} = post.data;
 
         return (
           <ListGroupItem 
             key={id} 
-            onClick={() => this.setSelectedPost(e)} 
+            onClick={() => this.setSelectedPost(post)} 
             className={this.checkIfActive(redditPosts, id)}
           >
             {title}
