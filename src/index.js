@@ -97,6 +97,7 @@ function reducer(state = initialState, action) {
 // Create that redux store (the whole point we use redux)
 let store = createStore(persistedReducer)
 
+// eslint-disable-next-line 
 let persistor = persistStore(store)
 
 ReactDOM.render(

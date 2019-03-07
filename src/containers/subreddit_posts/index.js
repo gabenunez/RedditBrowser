@@ -8,11 +8,6 @@ class SubRedditPosts extends Component {
     fetchError: null
   }
 
-  // Trigger fetching of data immediately if component mounts.
-  componentDidMount() {
-    this.fetchSubredditPosts();
-  }
-
   // Re-trigger data fetch if selected subreddit or sort changes.
   componentDidUpdate(prevProps) {
     const {selectedSubreddit, postSortOrder} = this.props;
@@ -96,21 +91,27 @@ class SubRedditPosts extends Component {
     }
   }
 
+  // Creates listgroup item
+  createGroupItem = (text) => {
+    return <ListGroupItem>{text}</ListGroupItem>
+  }
+
   render() {
-    const {subredditPosts, selectedRedditPosts} = this.props;
+    const {subredditPosts, selectedRedditPosts, selectedSubreddit} = this.props;
     const {fetchError} = this.state;
     
+    if(!selectedSubreddit) {
+      return this.createGroupItem('Please select a subreddit.');
+    }
+
     if(fetchError) {
-      return <ListGroupItem>{fetchError}</ListGroupItem>
+      return this.createGroupItem(fetchError);
     }
 
     if(!subredditPosts) {
-      return (
-        <ListGroupItem>
-          Please wait... loading posts.
-        </ListGroupItem>
-      )
+      return this.createGroupItem('Please wait... loading posts.');
     }
+
     return (
       subredditPosts.map((e) => {
         const {title, id} = e.data;
