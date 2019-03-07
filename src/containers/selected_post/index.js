@@ -17,7 +17,7 @@ class SelectedPost extends Component {
   }
 
   render() {
-    const {redditPosts, activeSelectedPost} = this.props;
+    const {redditPosts, activePostIndex} = this.props;
 
     if(redditPosts.length < 1) {
       return (
@@ -26,7 +26,7 @@ class SelectedPost extends Component {
     }
     
     // De-construct selected reddit post
-    const {permalink, title, author, selftext, thumbnail} = redditPosts[activeSelectedPost];
+    const {permalink, title, author, selftext, thumbnail} = redditPosts[activePostIndex];
 
     return (
       <Row>
@@ -62,7 +62,7 @@ class SelectedPost extends Component {
 function mapStateToProps(state) {
   return {
     redditPosts: state.redditPosts,
-    activeSelectedPost: state.activeSelectedPost
+    activePostIndex: state.activePostIndex
   };
 }
 

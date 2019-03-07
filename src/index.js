@@ -25,7 +25,7 @@ const initialState = {
     subredditPosts: null,
     redditPosts: [],
     postSortOrder: 'Hot',
-    activeSelectedPost: 0
+    activePostIndex: 0
 };
 
 // Reducers should always return something :)
@@ -76,17 +76,17 @@ function reducer(state = initialState, action) {
       case 'SET_ACTIVE_POST':
         return {
           ...state,
-          activeSelectedPost: action.payload
+          activePostIndex: action.payload
         }
       case 'SHOW_PREV_POST':
         return {
           ...state,
-          activeSelectedPost: state.activeSelectedPost + 1
+          activePostIndex: state.activePostIndex + 1
         }
       case 'SHOW_NEXT_POST':
         return {
         ...state,
-        activeSelectedPost: state.activeSelectedPost - 1
+        activePostIndex: state.activePostIndex - 1
       }
 
       default:

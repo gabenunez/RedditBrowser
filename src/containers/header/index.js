@@ -8,12 +8,12 @@ import HistoryNav from './history-nav';
 class Header extends Component {
 
   render() {
-    const {redditPosts, activeSelectedPost} = this.props;
+    const {redditPosts, activePostIndex} = this.props;
 
     return (
       <Row className='header-bar'>
         <Col sm='5'>
-          <span className='header-title'>{redditPosts.length > 0 ? `/r/${redditPosts[activeSelectedPost].subreddit} - ${redditPosts[activeSelectedPost].title}`: ''}</span>
+          <span className='header-title'>{redditPosts.length > 0 ? `/r/${redditPosts[activePostIndex].subreddit} - ${redditPosts[activePostIndex].title}`: ''}</span>
 
           <HistoryNav />
         </Col>
@@ -32,7 +32,7 @@ function mapStateToProps(state) {
   return {
     selectedSubreddit: state.selectedSubreddit,
     redditPosts: state.redditPosts,
-    activeSelectedPost: state.activeSelectedPost
+    activePostIndex: state.activePostIndex
   };
 }
 
