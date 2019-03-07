@@ -14,13 +14,13 @@ const App = () => {
       
       <Row>
         {/* Selected Post Details */}
-        <Col sm="5">
+        <Col md="5">
           <h3 className='text-center'>Selected Post</h3>
           <SelectedPost />
         </Col>
 
         {/* List of Subreddit Posts */}
-        <Col sm="4">
+        <Col md="4">
           <h3 className='text-center'>Subreddit Posts</h3>
           <ListGroup>
             <SubredditPosts />
@@ -28,7 +28,7 @@ const App = () => {
         </Col>
         
         {/* List of available subreddits */}
-        <Col sm="3">
+        <Col md="3">
           <h3 className='text-center'>Subreddits</h3>
           <ListGroup>
             <SubredditList />
